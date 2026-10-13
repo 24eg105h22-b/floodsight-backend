@@ -1,0 +1,21 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <!-- Development trace: fixed stages/scalars and bounded/redacted provider errors and parsed evidence. No headers, credentials or image payloads. -->
+    <springProperty scope="context" name="DEPTH_TRACE_PATH" source="depth.diagnostics.log-path"
+                    defaultValue="logs/floodsight-depth-diagnostics.log"/>
+    <appender name="DEPTH_TRACE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${DEPTH_TRACE_PATH}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${DEPTH_TRACE_PATH}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>1MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>5MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder><pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSS} %level %msg%n</pattern></encoder>
+    </appender>
+    <logger name="com.flooddepth.depth.DepthDiagnostics" level="INFO">
+        <appender-ref ref="DEPTH_TRACE"/>
+    </logger>
+    <root level="INFO"><appender-ref ref="CONSOLE"/></root>
+</configuration>
