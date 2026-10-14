@@ -24,8 +24,9 @@ class DepthWorkflowControllerTest {
     @Autowired MockMvc mvc;
     @MockitoBean DepthWorkflowService workflow;
     final MockMultipartFile file=new MockMultipartFile("file","photo.png","image/png",new byte[]{1,2,3});
-    @ParameterizedTest @ValueSource(strings={"http://localhost:5173","http://127.0.0.1:5173"})
-    void bothLocalWebsiteOriginsReachWorkflowWithJsonResponse(String origin) throws Exception {
+    @ParameterizedTest @ValueSource(strings={"http://localhost:5173","http://127.0.0.1:5173",
+            "https://floodsight-frontend.vercel.app"})
+    void allowedWebsiteOriginsReachWorkflowWithJsonResponse(String origin) throws Exception {
         when(workflow.estimate(any(),anyDouble(),anyDouble())).thenReturn(new DepthResult("INSUFFICIENT_EVIDENCE",10,20,
                 null,null,null,null,null,"INSUFFICIENT",null,false,List.of(),List.of("Insufficient landmarks"),null));
         mvc.perform(multipart("/api/flood/estimate-depth").file(file).header("Origin",origin)

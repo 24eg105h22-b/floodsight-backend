@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/flood")
-@CrossOrigin(origins = {"http://localhost:5173", "http://127.0.0.1:5173"})
 public class DepthWorkflowController {
     private final DepthWorkflowService workflow;
     public DepthWorkflowController(DepthWorkflowService workflow) { this.workflow = workflow; }

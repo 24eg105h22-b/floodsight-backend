@@ -7,7 +7,6 @@ import com.flooddepth.mapillary.MapillaryService;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +19,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/mapillary")
-@CrossOrigin(origins = "http://localhost:5173")
 public class MapillaryController {
     private final MapillaryService service;
 

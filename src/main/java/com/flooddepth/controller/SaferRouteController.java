@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/routes")
-@CrossOrigin(origins={"http://localhost:5173","http://127.0.0.1:5173"})
 public final class SaferRouteController {
     private final SaferRouteService service;
     public SaferRouteController(SaferRouteService service){this.service=service;}
